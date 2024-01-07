@@ -2,6 +2,7 @@ import discord
 import datetime
 import os
 
+from dotenv import load_dotenv
 from discord.ext import tasks, commands
 
 load_dotenv()
