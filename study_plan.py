@@ -1,9 +1,10 @@
 import discord
+import datetime
+import os
 
 from discord.ext import tasks, commands
-import datetime
-import time
-import os
+
+load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
@@ -17,7 +18,7 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 
 @tasks.loop(minutes=1)
 async def study_time_notification():
-    now = datetime.datetime.now(pytz.timezone('Asia/Seoul'))
+    now = datetime.datetime.now()
     if(now.hour == 9 and now.minute == 0):
         channel = bot.get.channel(CHANNEL_ID)
         role = discord.utils.get(channel.guild.roles, name ="6기-server")
@@ -49,17 +50,16 @@ async def plan(ctx):
     except asyncio.TimeoutError:
         return await ctx.send("입력 시간이 초과되었습니다.")
     
-    avatar_url = ctx.author.avatar_url  # 유저의 프로필 사진 URL
+    avatar_url = ctx.author.avatar_url 
     embed = discord.Embed(title="Plan",
                           description=f"{ctx.author.mention} 할 일: {today_task.content}, "
                                       f"궁금한 점: {curious_point.content}, "
                                       f"어려운 점: {difficult_point.content}",
                           color=discord.Color.blue())
-    embed.set_thumbnail(url=avatar_url)  # 프로필 사진을 썸네일로 추가
+    embed.set_thumbnail(url=avatar_url) 
 
     await ctx.send(embed=embed)
 
 
 
 bot.run(TOKEN)
-
