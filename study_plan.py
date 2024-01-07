@@ -61,5 +61,5 @@ async def plan(ctx):
 
 
 
-client.run(TOKEN)
+bot.run(TOKEN)
 
