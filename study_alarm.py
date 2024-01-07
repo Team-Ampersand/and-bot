@@ -3,9 +3,10 @@ import discord
 from discord.ext import tasks
 import datetime
 import time
+import os
 
-TOKEN = 'MTE5MzU0NDg5NDExMTgyMTg0NA.GoIcP6.1Xg9Bu9CROeY1h8mtagHOJ0pdgr3y4CFSORDz8'
-CHANNEL_ID = 'https://discord.com/api/oauth2/authorize?client_id=1193544894111821844&permissions=8&scope=bot'
+TOKEN = os.getenv("TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 intents = discord.Intents.default()
 intents.typing = False
