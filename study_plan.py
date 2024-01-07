@@ -3,6 +3,8 @@ import datetime
 import os
 
 from dotenv import load_dotenv
+from pytz import timezone
+
 from discord.ext import tasks, commands
 
 load_dotenv()
@@ -19,7 +21,7 @@ bot = commands.Bot(command_prefix='/', intents=intents)
 
 @tasks.loop(minutes=1)
 async def study_time_notification():
-    now = datetime.datetime.now()
+    now = datetime.datetime.now(timezone('Asia/Seoul'))
     if(now.hour == 9 and now.minute == 0):
         channel = bot.get.channel(CHANNEL_ID)
         role = discord.utils.get(channel.guild.roles, name ="6기-server")
